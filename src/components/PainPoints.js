@@ -35,7 +35,13 @@ const pains = [
 
 export default function PainPoints() {
   return (
-    <section className="py-20 bg-white">
+    <section
+      className="py-20 bg-white relative overflow-hidden"
+      style={{
+        backgroundImage: 'radial-gradient(circle, #cbd5e1 1.5px, transparent 1.5px)',
+        backgroundSize: '28px 28px',
+      }}
+    >
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-14">
           <h2 className="section-title">מכירים את זה?</h2>

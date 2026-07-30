@@ -1,50 +1,50 @@
 /**
  * Monday.com Lead Submission API
  * Board: https://tech-career-team.monday.com/boards/18396761860
- *
- * SETUP:
- * 1. Set MONDAY_API_TOKEN in your .env.local / Vercel environment variables
- * 2. Run /api/monday-columns to discover your board's column IDs
- * 3. Update COLUMN_IDS below to match your board
+ * Board name: לוח מועמדים ניסיון - נטלי נתי ואורלי
+ * Column IDs discovered via Monday.com MCP — no manual configuration needed.
  */
 
-const BOARD_ID = '18396761860';
-const SOURCE_TAG = 'landing-page-avraham';
+const BOARD_ID = 18396761860;
+const GROUP_ID = 'topics'; // "מועמדים חדשים מטופס הרשמה"
 
-/**
- * Column IDs for the Monday.com board.
- * To find your column IDs: GET /api/monday-columns
- * Or in Monday.com: Board Settings → Columns → right-click column → "Copy column ID"
- *
- * Common defaults — update these if they don't match your board:
- */
-const COLUMN_IDS = {
-  email: process.env.MONDAY_COL_EMAIL || 'email',
-  phone: process.env.MONDAY_COL_PHONE || 'phone',
-  city: process.env.MONDAY_COL_CITY || 'text',
-  source: process.env.MONDAY_COL_SOURCE || 'text1',
-};
+function buildColumnValues({ email, phone, city, firstName, lastName }) {
+  const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
 
-function buildColumnValues({ email, phone, city }) {
-  const values = {};
+  const values = {
+    // Email (text column)
+    text_mkyq3a1: email || '',
 
-  if (email) {
-    values[COLUMN_IDS.email] = { email: email, text: email };
-  }
+    // Phone (phone column)
+    phone_mm46se7z: phone
+      ? { phone: phone.replace(/\D/g, ''), countryShortName: 'IL' }
+      : '',
 
-  if (phone) {
-    values[COLUMN_IDS.phone] = { phone: phone, countryShortName: 'IL' };
-  }
+    // City
+    text_mm05bcne: city || '',
 
-  if (city) {
-    values[COLUMN_IDS.city] = city;
-  }
+    // First / Last name split
+    text_mkywv4ea: firstName || '',
+    text_mkyqqaf9: lastName || '',
 
-  if (COLUMN_IDS.source) {
-    values[COLUMN_IDS.source] = SOURCE_TAG;
-  }
+    // Status → "השאיר/ה פרטים" (label id: 5)
+    color_mm01x6p7: { label: 'השאיר/ה פרטים' },
+
+    // UTM / source tracking
+    text_mm5qatev: 'landing-page-avraham',
+
+    // Submission date
+    date_mm059f56: { date: today },
+  };
 
   return JSON.stringify(values);
+}
+
+function splitName(fullName = '') {
+  const parts = fullName.trim().split(/\s+/);
+  const firstName = parts[0] || '';
+  const lastName = parts.slice(1).join(' ') || '';
+  return { firstName, lastName };
 }
 
 async function createMondayItem({ name, email, phone, city }) {
@@ -53,12 +53,14 @@ async function createMondayItem({ name, email, phone, city }) {
     throw new Error('MONDAY_API_TOKEN is not configured');
   }
 
-  const columnValues = buildColumnValues({ email, phone, city });
+  const { firstName, lastName } = splitName(name);
+  const columnValues = buildColumnValues({ email, phone, city, firstName, lastName });
 
   const query = `
-    mutation CreateLead($boardId: ID!, $itemName: String!, $columnValues: JSON!) {
+    mutation CreateLead($boardId: ID!, $groupId: String!, $itemName: String!, $columnValues: JSON!) {
       create_item(
         board_id: $boardId
+        group_id: $groupId
         item_name: $itemName
         column_values: $columnValues
       ) {
@@ -79,6 +81,7 @@ async function createMondayItem({ name, email, phone, city }) {
       query,
       variables: {
         boardId: BOARD_ID,
+        groupId: GROUP_ID,
         itemName: name || 'ליד חדש',
         columnValues,
       },
@@ -105,7 +108,6 @@ export async function POST(request) {
     const body = await request.json();
     const { name, email, phone, city } = body;
 
-    // Basic validation
     if (!name || !email || !phone) {
       return Response.json(
         { error: 'שם, אימייל וטלפון הם שדות חובה' },
@@ -119,7 +121,6 @@ export async function POST(request) {
   } catch (err) {
     console.error('[/api/submit] Error:', err.message);
 
-    // Return a user-friendly error
     const isConfig = err.message.includes('MONDAY_API_TOKEN');
     return Response.json(
       {

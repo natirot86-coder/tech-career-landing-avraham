@@ -5,21 +5,24 @@ const testimonials = [
     quote:
       'לאורך עשרת החודשים של למידה מעשירה ומאתגרת, טק-קריירה הייתה עבורי הרבה יותר ממקום לימודים. הצוות המדהים ליווה אותי בכל צעד בדרך, סיפק לי כלים להתמודד עם האתגרים והעניק לי תמיכה בלתי פוסקת.',
     name: 'מדלן טדלה',
-    title: 'בוגרת קורס תקשורת ואבטחת מידע 2024, FSE ב-Cognyte',
+    title: 'בוגרת קורס תקשורת ואבטחת מידע 2024',
+    company: 'FSE ב-Cognyte',
     avatar: '/images/portrait-2.jpg',
   },
   {
     quote:
       'טק-קריירה נתנו לי את הכלים להאמין בעצמי מחדש, לבנות רשת חברתית-מקצועית ולהגשים חלום — להשתלב בהייטק. אני גאה להיות חלק מהקהילה המדהימה שטק-קריירה יצרה.',
     name: 'שואנש אבבה',
-    title: 'בוגרת קורס פיתוח 2020, מהנדסת תוכנה ב-AT&T',
+    title: 'בוגרת קורס פיתוח 2020',
+    company: 'מהנדסת תוכנה ב-AT&T',
     avatar: null,
   },
   {
     quote:
       'ההכשרה בטק-קריירה הייתה עבורי נקודת מפנה משמעותית. היא אפשרה לי להשתלב בתעשייה בצורה חלקה ומוצלחת. ממליץ מכל הלב לכל מי שמתלבט.',
     name: 'רועי מקונן',
-    title: 'בוגר קורס פיתוח 2022, מפתח תוכנה ב-Boutique Tech Studios',
+    title: 'בוגר קורס פיתוח 2022',
+    company: 'מפתח תוכנה ב-Boutique Tech Studios',
     avatar: '/images/portrait-1.jpg',
   },
 ];
@@ -28,7 +31,7 @@ function Initials({ name }) {
   const parts = name.split(' ');
   const initials = parts.map((p) => p[0]).join('').slice(0, 2);
   return (
-    <div className="w-14 h-14 rounded-full bg-brand-orange text-white flex items-center justify-center font-bold text-lg flex-shrink-0">
+    <div className="w-20 h-20 rounded-full bg-brand-orange text-white flex items-center justify-center font-bold text-2xl flex-shrink-0 ring-4 ring-brand-orange/20">
       {initials}
     </div>
   );
@@ -55,24 +58,27 @@ export default function Testimonials() {
                 {t.quote}
               </p>
 
-              <div className="flex items-center gap-3 border-t border-gray-100 pt-5">
+              <div className="flex items-center gap-4 border-t border-gray-100 pt-5">
                 {t.avatar ? (
-                  <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0">
+                  <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 ring-4 ring-brand-orange/20">
                     <Image
                       src={t.avatar}
                       alt={t.name}
-                      width={56}
-                      height={56}
-                      className="w-full h-full object-cover"
+                      width={80}
+                      height={80}
+                      className="w-full h-full object-cover object-top"
                     />
                   </div>
                 ) : (
                   <Initials name={t.name} />
                 )}
                 <div>
-                  <div className="font-bold text-brand-navy">{t.name}</div>
+                  <div className="font-bold text-brand-navy text-lg">{t.name}</div>
                   <div className="text-brand-gray-mid text-xs leading-snug mt-0.5">
                     {t.title}
+                  </div>
+                  <div className="text-brand-orange text-xs font-semibold mt-1">
+                    {t.company}
                   </div>
                 </div>
               </div>

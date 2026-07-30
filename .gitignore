@@ -10,3 +10,5 @@ preview.png
 preview-about.png
 preview-stats.png
 # Keep public/images/ - these are needed for the site
+
+.vercel

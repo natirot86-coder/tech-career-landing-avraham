@@ -39,7 +39,13 @@ const reasons = [
 
 export default function WhyTech() {
   return (
-    <section className="py-20 bg-brand-gray">
+    <section
+      className="py-20 bg-brand-gray relative overflow-hidden"
+      style={{
+        backgroundImage: 'radial-gradient(circle, #c7d2e0 1.5px, transparent 1.5px)',
+        backgroundSize: '28px 28px',
+      }}
+    >
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-14">
           <h2 className="section-title">למה דווקא הייטק?</h2>

@@ -21,7 +21,7 @@ export default function Footer() {
           {/* Social links */}
           <div className="flex items-center gap-5">
             <a
-              href="https://www.youtube.com/@techcareeril"
+              href="https://www.youtube.com/@-tech-career5878"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="YouTube"
@@ -32,7 +32,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="https://www.linkedin.com/company/tech-career-org"
+              href="https://www.linkedin.com/company/tech-career-il"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
@@ -54,7 +54,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="https://www.instagram.com/techcareer.org"
+              href="https://www.instagram.com/techcareer"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"

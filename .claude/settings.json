@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(agent-browser)",
+      "Skill(agent-browser:*)",
+      "Bash(npm --version)",
+      "Bash(gh --version)",
+      "Bash(agent-browser open https://www.tech-career.org)",
+      "Bash(agent-browser wait --load networkidle)",
+      "Bash(agent-browser scroll down 3000)",
+      "Bash(agent-browser wait 1500)",
+      "Bash(curl -sL \"https://static.wixstatic.com/media/66f4ce_83faed0169604df584ecd3da6be92937~mv2.png\" -o logo.png)",
+      "Bash(curl -sL \"https://static.wixstatic.com/media/955558_28854d545a284bfbb24b73e02e2b1441~mv2.jpg\" -o graduates-group.jpg)",
+      "Bash(curl -sL \"https://static.wixstatic.com/media/955558_334f22343df54798b9456702ba8c96e9f001.jpg\" -o students-class.jpg)",
+      "Bash(curl -sL \"https://static.wixstatic.com/media/955558_b93da843145046b2bcff8ade6b426a2e~mv2.jpg\" -o panel-event.jpg)",
+      "Bash(curl -sL \"https://static.wixstatic.com/media/955558_4c467014a9514ffaaccffa3dea8fbc17~mv2.jpg\" -o portrait-1.jpg)",
+      "Bash(curl -sL \"https://static.wixstatic.com/media/955558_881ca22e628e428f8353231c72ed3558~mv2.jpeg\" -o portrait-2.jpg)",
+      "Bash(agent-browser close)",
+      "Bash(npm install next@latest)",
+      "Bash(agent-browser open http://localhost:3000)",
+      "Bash(agent-browser wait 2000)",
+      "Bash(agent-browser screenshot --full \"c:/Users/user/tech-career-landing-page-avraham/preview.png\")",
+      "Bash(agent-browser scroll down 1800)",
+      "Bash(agent-browser wait 1000)",
+      "Bash(agent-browser screenshot \"c:/Users/user/tech-career-landing-page-avraham/preview-about.png\")",
+      "Bash(agent-browser scroll down 2500)",
+      "Bash(agent-browser screenshot \"c:/Users/user/tech-career-landing-page-avraham/preview-stats.png\")",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(git add src/ public/ package.json next.config.mjs tailwind.config.js postcss.config.mjs jsconfig.json .gitignore)",
+      "Bash(gh repo create tech-career-landing-avraham --public --source=. --remote=origin --push)",
+      "Bash(vercel --yes --prod)",
+      "Bash(vercel --yes --prod --scope natirot86-4356s-projects)",
+      "Bash(vercel env add MONDAY_API_TOKEN production --scope natirot86-4356s-projects)",
+      "Bash(agent-browser open \"https://www.youtube.com/@-tech-career5878/videos\")",
+      "Bash(agent-browser screenshot \"c:/Users/user/tech-career-landing-page-avraham/yt-channel.png\")",
+      "Bash(agent-browser scroll down 800)",
+      "Bash(agent-browser screenshot \"c:/Users/user/tech-career-landing-page-avraham/yt-videos.png\")",
+      "WebFetch(domain:www.tech-career.org)"
+    ]
+  }
+}
