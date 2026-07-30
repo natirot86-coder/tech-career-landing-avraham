@@ -1,0 +1,12 @@
+.env.local
+.env
+node_modules/
+.next/
+out/
+# Screenshots from build process (not site images)
+landing-screenshot.png
+techcareer-org.png
+preview.png
+preview-about.png
+preview-stats.png
+# Keep public/images/ - these are needed for the site

@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  direction: rtl;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Heebo', 'Arial Hebrew', sans-serif;
+  background-color: #f7f8fb;
+  color: #1a2340;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-block bg-brand-orange text-white font-bold px-8 py-3 rounded-full transition-all duration-200 hover:bg-brand-orange-dark hover:shadow-lg active:scale-95;
+  }
+
+  .btn-outline {
+    @apply inline-block border-2 border-brand-orange text-brand-orange font-bold px-8 py-3 rounded-full transition-all duration-200 hover:bg-brand-orange hover:text-white;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-extrabold text-brand-navy mb-3;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-6 transition-shadow duration-200 hover:shadow-md;
+  }
+}
