@@ -1,39 +1,32 @@
-const reasons = [
+import Image from 'next/image';
+
+const articles = [
   {
-    title: 'שכר גבוה',
-    desc: 'שכר ממוצע בהייטק גבוה פי 2 מהממוצע במשק',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
+    image: '/images/article-calcalist-juniors.jpg',
+    source: 'כלכליסט',
+    date: '01.05.2026',
+    stat: '1,000 ג\'וניורים',
+    statLabel: 'Salesforce מגייסת — הביקוש לצעירים מדור ה-AI חוזר',
+    url: 'https://www.calcalist.co.il/calcalistech/article/bjphxyxc11g',
+    alt: 'הג\'וניורים חוזרים? לצד פיטורי הענק, בהייטק בונים על צעירי דור ה-AI',
   },
   {
-    title: 'ביקוש גבוה',
-    desc: 'אלפי משרות פתוחות בכל רגע נתון',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-      </svg>
-    ),
+    image: '/images/article-calcalist-salary.jpg',
+    source: 'כלכליסט',
+    date: '04.05.2026',
+    stat: '35,619 ₪',
+    statLabel: 'שכר ממוצע בהייטק — פי 2.2 מהממוצע במשק',
+    url: 'https://www.calcalist.co.il/local_news/article/syonaji0zx',
+    alt: 'השכר הממוצע שבר שיא במרץ: כמעט 16 אלף שקל - אך מספר המשרות צנח ב-8%',
   },
   {
-    title: 'קידום מהיר',
-    desc: 'התקדמות מקצועית מהירה על בסיס יכולות',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-      </svg>
-    ),
-  },
-  {
-    title: 'גמישות',
-    desc: 'אפשרויות עבודה מרחוק והיברידי',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
+    image: '/images/article-mako.jpg',
+    source: 'mako',
+    date: '16.04.2026',
+    stat: '30K–65K ₪',
+    statLabel: 'שכר חודשי למשרות AI חדשות בהייטק',
+    url: 'https://www.mako.co.il/nexter-news/Article-91a703652959d91027.htm',
+    alt: 'עשרות אלפי שקלים בחודש וביקוש שרק עולה: תפקידי ה-AI החדשים בהייטק',
   },
 ];
 
@@ -50,21 +43,62 @@ export default function WhyTech() {
         <div className="text-center mb-14">
           <h2 className="section-title">למה דווקא הייטק?</h2>
           <p className="text-brand-gray-mid text-lg">
-            תעשייה שמתגמלת יכולות, לא תעודות
+            אל תאמינו לנו — תאמינו לעיתונות הכלכלית
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {reasons.map((r, i) => (
-            <div key={i} className="card text-center group">
-              <div className="w-16 h-16 rounded-2xl bg-brand-orange-light text-brand-orange flex items-center justify-center mx-auto mb-4 group-hover:bg-brand-orange group-hover:text-white transition-colors duration-200">
-                {r.icon}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {articles.map((a, i) => (
+            <div
+              key={i}
+              className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 flex flex-col group"
+            >
+              {/* Source + date */}
+              <div className="flex items-center justify-between px-5 py-3 border-b border-gray-100">
+                <span className="text-xs font-bold text-brand-navy/50">{a.source}</span>
+                <span className="text-xs text-brand-gray-mid font-mono">{a.date}</span>
               </div>
-              <h3 className="font-extrabold text-brand-navy text-xl mb-2">{r.title}</h3>
-              <p className="text-brand-gray-mid text-sm leading-relaxed">{r.desc}</p>
+
+              {/* Key stat — fixed height so all images start at the same point */}
+              <div className="px-5 py-4 h-[130px] overflow-hidden">
+                <p className="text-brand-orange font-extrabold text-3xl leading-none">
+                  {a.stat}
+                </p>
+                <p className="text-brand-navy/70 text-sm mt-1.5">{a.statLabel}</p>
+              </div>
+
+              {/* Article screenshot — proof it's real */}
+              <div className="relative h-72 flex-shrink-0">
+                <Image
+                  src={a.image}
+                  alt={a.alt}
+                  fill
+                  className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
+
+              {/* Link */}
+              <div className="px-5 py-3 border-t border-gray-100 mt-auto">
+                <a
+                  href={a.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-brand-orange font-semibold hover:underline flex items-center gap-1"
+                >
+                  לכתבה המלאה
+                  <svg className="w-3 h-3 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
             </div>
           ))}
         </div>
+
+        <p className="text-center text-xs text-brand-gray-mid mt-8 opacity-60">
+          * כתבות שפורסמו בתקשורת הכלכלית הישראלית ב-2026
+        </p>
       </div>
     </section>
   );

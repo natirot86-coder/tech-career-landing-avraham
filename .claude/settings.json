@@ -35,7 +35,14 @@
       "Bash(agent-browser screenshot \"c:/Users/user/tech-career-landing-page-avraham/yt-channel.png\")",
       "Bash(agent-browser scroll down 800)",
       "Bash(agent-browser screenshot \"c:/Users/user/tech-career-landing-page-avraham/yt-videos.png\")",
-      "WebFetch(domain:www.tech-career.org)"
+      "WebFetch(domain:www.tech-career.org)",
+      "WebFetch(domain:www.calcalist.co.il)",
+      "WebFetch(domain:www.mako.co.il)",
+      "Bash(vercel env add NEXT_PUBLIC_WHATSAPP_NUMBER production --scope natirot86-4356s-projects --yes)",
+      "Bash(vercel env rm NEXT_PUBLIC_WHATSAPP_NUMBER production --yes --scope natirot86-4356s-projects)",
+      "Bash(vercel env rm MONDAY_API_TOKEN production --yes --scope natirot86-4356s-projects)",
+      "Bash(vercel env add MONDAY_API_TOKEN production --scope natirot86-4356s-projects --yes)",
+      "Bash(git add CLAUDE.md)"
     ]
   }
 }

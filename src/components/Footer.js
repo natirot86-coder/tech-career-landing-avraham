@@ -66,10 +66,16 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Copyright */}
-          <p className="text-sm">
-            © כל הזכויות שמורות לטק-קריירה {year}
-          </p>
+          {/* Contact + Copyright */}
+          <div className="text-sm text-center md:text-left">
+            <a
+              href="mailto:sara@tech-career.org"
+              className="hover:text-white transition-colors block"
+            >
+              sara@tech-career.org
+            </a>
+            <p className="mt-1">© כל הזכויות שמורות לטק-קריירה {year}</p>
+          </div>
         </div>
       </div>
     </footer>

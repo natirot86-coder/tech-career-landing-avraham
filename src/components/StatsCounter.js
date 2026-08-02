@@ -32,8 +32,8 @@ function StatCard({ stat, started }) {
   const count = useCountUp(stat.target, 1800, started);
 
   return (
-    <div className={`text-center p-8 rounded-2xl ${stat.highlight ? 'bg-brand-orange text-white' : 'bg-white'}`}>
-      <div className={`text-5xl md:text-6xl font-black mb-2 ${stat.highlight ? 'text-white' : 'text-brand-orange'}`}>
+    <div className={`text-center p-4 md:p-8 rounded-2xl ${stat.highlight ? 'bg-brand-orange text-white' : 'bg-white'}`}>
+      <div className={`text-3xl md:text-5xl lg:text-6xl font-black mb-2 leading-none ${stat.highlight ? 'text-white' : 'text-brand-orange'}`}>
         {count.toLocaleString()}{stat.suffix}
       </div>
       <div className={`text-sm font-medium ${stat.highlight ? 'text-white/80' : 'text-brand-gray-mid'}`}>

@@ -1,35 +1,19 @@
-const pains = [
+const questions = [
   {
-    text: 'עובדים בעבודה שלא מממשת את מה שאתם באמת יכולים',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
+    q: 'עבדתם קשה כל חייכם — ועדיין מרגישים שמגיע לכם הרבה יותר?',
+    sub: 'הרבה אנשים מוכשרים תקועים בעבודות שלא מאפשרות להם להתקדם. זה לא בגללכם — זה בגלל שאף אחד לא הראה להם את הדרך.',
   },
   {
-    text: 'מרגישים שההייטק זה משהו שלא בשבילכם',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
-      </svg>
-    ),
+    q: 'אמרו לכם שהייטק זה "לא בשבילכם" — ופשוט האמנתם?',
+    sub: 'הנרטיב הזה שגוי לחלוטין. ההייטק מחפש אנשים עם מוטיבציה ורצון ללמוד — לא תואר ולא קשרים.',
   },
   {
-    text: 'רוצים שינוי אבל לא יודעים מאיפה מתחילים',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
+    q: 'כמה שנים עוד תחכו לשינוי שיגיע מעצמו?',
+    sub: 'שינוי לא קורה לבד. הוא קורה כשמחליטים לעשות צעד אחד קדימה — גם כשזה מפחיד.',
   },
   {
-    text: 'חוששים להשקיע בלימודים שלא יובילו לשום מקום',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-      </svg>
-    ),
+    q: 'רוצים שהילדים שלכם יתחילו ממקום אחר?',
+    sub: 'זה מתחיל מכם. השקעה בעצמכם היום היא השינוי הכי גדול שאתם יכולים לעשות — לעצמכם ולמשפחה שלכם.',
   },
 ];
 
@@ -42,25 +26,34 @@ export default function PainPoints() {
         backgroundSize: '28px 28px',
       }}
     >
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="text-center mb-14">
-          <h2 className="section-title">מכירים את זה?</h2>
-          <p className="text-brand-gray-mid text-lg">
-            הרבה אנשים מרגישים כך. אתם לא לבד.
-          </p>
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="text-center mb-12">
+          <h2 className="section-title">תעצרו רגע ותשאלו את עצמכם</h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {pains.map((pain, i) => (
-            <div key={i} className="card flex items-start gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-brand-orange-light text-brand-orange flex items-center justify-center mt-0.5">
-                {pain.icon}
-              </div>
-              <p className="text-brand-navy font-medium text-lg leading-relaxed">
-                {pain.text}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {questions.map((item, i) => (
+            <div
+              key={i}
+              className="bg-white rounded-2xl p-7 shadow-sm border border-gray-100 border-r-4 border-r-brand-orange"
+            >
+              <p className="text-brand-navy font-bold text-xl leading-snug mb-3">
+                {item.q}
+              </p>
+              <p className="text-brand-gray-mid text-base leading-relaxed">
+                {item.sub}
               </p>
             </div>
           ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <p className="text-brand-navy/60 text-lg">
+            אם הנהנתם ראש — אתם במקום הנכון.
+          </p>
+          <p className="text-brand-orange font-bold text-xl mt-2">
+            אנחנו פה כדי לשנות את זה.
+          </p>
         </div>
       </div>
     </section>
