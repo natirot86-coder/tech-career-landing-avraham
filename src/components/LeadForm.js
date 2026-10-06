@@ -17,10 +17,15 @@ export default function LeadForm() {
     setErrorMsg('');
 
     try {
+      const params = new URLSearchParams(window.location.search);
+      const utmSource = params.get('utm_source') || 'landing-page-avraham';
+      const utmCampaign = params.get('utm_campaign') || undefined;
+      const utmContent = params.get('utm_content') || undefined;
+
       const res = await fetch('/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, utmSource, utmCampaign, utmContent }),
       });
 
       if (!res.ok) {

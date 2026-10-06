@@ -49,7 +49,7 @@ export default function PainPoints() {
 
         <div className="text-center mt-12">
           <p className="text-brand-navy/60 text-lg">
-            אם הנהנתם ראש — אתם במקום הנכון.
+            הנהנתם בראש — אתם במקום הנכון.
           </p>
           <p className="text-brand-orange font-bold text-xl mt-2">
             אנחנו פה כדי לשנות את זה.

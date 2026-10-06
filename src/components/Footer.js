@@ -6,6 +6,31 @@ export default function Footer() {
   return (
     <footer className="bg-brand-navy text-white/70 py-10">
       <div className="max-w-5xl mx-auto px-6">
+        {/* Partner logos */}
+        <div className="flex flex-col items-center gap-3 pb-8 mb-8 border-b border-white/10">
+          <span className="text-xs text-white/50">בשיתוף</span>
+          <div className="flex items-center gap-6">
+            <div className="bg-white rounded-md px-3 py-2">
+              <Image
+                src="/images/logo-ministry-of-labor.png"
+                alt="משרד העבודה"
+                width={160}
+                height={56}
+                className="h-8 w-auto object-contain"
+              />
+            </div>
+            <div className="bg-white rounded-md px-3 py-2">
+              <Image
+                src="/images/logo-initiative.png"
+                alt="לוגו המיזם"
+                width={80}
+                height={80}
+                className="h-10 w-auto object-contain"
+              />
+            </div>
+          </div>
+        </div>
+
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo */}
           <a href="https://www.tech-career.org" target="_blank" rel="noopener noreferrer">
@@ -32,7 +57,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="https://www.linkedin.com/company/tech-career-il"
+              href="https://www.linkedin.com/school/techcareerisrael/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"

@@ -8,7 +8,7 @@
 const BOARD_ID = 18396761860;
 const GROUP_ID = 'topics'; // "מועמדים חדשים מטופס הרשמה"
 
-function buildColumnValues({ email, phone, city, firstName, lastName }) {
+function buildColumnValues({ email, phone, city, firstName, lastName, utmSource, utmCampaign, utmContent }) {
   const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
 
   const values = {
@@ -30,8 +30,11 @@ function buildColumnValues({ email, phone, city, firstName, lastName }) {
     // Status → "השאיר/ה פרטים" (label id: 5)
     color_mm01x6p7: { label: 'השאיר/ה פרטים' },
 
-    // UTM / source tracking
-    text_mm5qatev: 'landing-page-avraham',
+    // UTM tracking — real query params from the URL when present,
+    // otherwise fall back to this page's default campaign identifiers.
+    text_mm5qatev: utmSource || 'landing-page-avraham',
+    text_mm5qk6z5: utmCampaign || 'יש רגע יפה במיוחד כשבוגר חוזר לטק קריירה — הפעם...',
+    text_mm5qtcpe: utmContent || 'landingpage_campign',
 
     // Submission date
     date_mm059f56: { date: today },
@@ -47,14 +50,14 @@ function splitName(fullName = '') {
   return { firstName, lastName };
 }
 
-async function createMondayItem({ name, email, phone, city }) {
+async function createMondayItem({ name, email, phone, city, utmSource, utmCampaign, utmContent }) {
   const token = process.env.MONDAY_API_TOKEN;
   if (!token || token === 'your_monday_api_token_here') {
     throw new Error('MONDAY_API_TOKEN is not configured');
   }
 
   const { firstName, lastName } = splitName(name);
-  const columnValues = buildColumnValues({ email, phone, city, firstName, lastName });
+  const columnValues = buildColumnValues({ email, phone, city, firstName, lastName, utmSource, utmCampaign, utmContent });
 
   const query = `
     mutation CreateLead($boardId: ID!, $groupId: String!, $itemName: String!, $columnValues: JSON!) {
@@ -106,7 +109,7 @@ async function createMondayItem({ name, email, phone, city }) {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { name, email, phone, city } = body;
+    const { name, email, phone, city, utmSource, utmCampaign, utmContent } = body;
 
     if (!name || !email || !phone) {
       return Response.json(
@@ -115,7 +118,7 @@ export async function POST(request) {
       );
     }
 
-    const item = await createMondayItem({ name, email, phone, city });
+    const item = await createMondayItem({ name, email, phone, city, utmSource, utmCampaign, utmContent });
 
     return Response.json({ success: true, itemId: item?.id });
   } catch (err) {

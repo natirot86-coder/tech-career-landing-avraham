@@ -1,0 +1,274 @@
+/* ──────────────────────────────────────────────────────────────
+   Help Desk templates — motion & effects (scoped with .hd- prefix)
+   ────────────────────────────────────────────────────────────── */
+
+@property --hd-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* ── Scroll reveal (JS toggles .is-in) ── */
+.hd-reveal {
+  opacity: 0;
+  transform: translateY(28px) scale(0.98);
+  filter: blur(6px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 0.8s ease;
+}
+.hd-reveal.is-in {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* ── Shared ── */
+.hd-pop {
+  animation: hd-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes hd-pop {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+.hd-marquee {
+  display: flex;
+  width: max-content;
+  direction: ltr;
+  animation: hd-marquee 38s linear infinite;
+}
+.hd-marquee-wrap:hover .hd-marquee {
+  animation-play-state: paused;
+}
+@keyframes hd-marquee {
+  to { transform: translateX(-50%); }
+}
+
+.hd-float {
+  animation: hd-float 6s ease-in-out infinite;
+}
+@keyframes hd-float {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50% { transform: translateY(-14px) rotate(var(--r, 0deg)); }
+}
+
+/* Scroll-driven progress bar (native CSS, progressive enhancement) */
+.hd-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 3px;
+  transform-origin: right;
+  transform: scaleX(0);
+  z-index: 60;
+}
+@supports (animation-timeline: scroll()) {
+  .hd-progress {
+    animation: hd-grow linear both;
+    animation-timeline: scroll(root);
+  }
+  .hd-scroll-in {
+    animation: hd-scroll-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 35%;
+  }
+}
+@keyframes hd-grow {
+  to { transform: scaleX(1); }
+}
+@keyframes hd-scroll-in {
+  from { opacity: 0.2; transform: translateY(40px) scale(0.94); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ══════════ AURORA — dark glassmorphism + animated mesh ══════════ */
+.hd-aurora {
+  background: #07071a;
+  color: #fff;
+}
+.hd-mesh {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hd-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.55;
+  mix-blend-mode: screen;
+  animation: hd-blob 22s ease-in-out infinite alternate;
+}
+@keyframes hd-blob {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(12%, -10%) scale(1.15); }
+  66% { transform: translate(-10%, 8%) scale(0.9); }
+  100% { transform: translate(6%, 12%) scale(1.05); }
+}
+.hd-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.hd-glass {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+.hd-gradient-text {
+  background: linear-gradient(90deg, #ff7a45, #ff3d8b, #a855f7, #38bdf8, #ff7a45);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: hd-shift 8s linear infinite;
+}
+@keyframes hd-shift {
+  to { background-position: 300% 0; }
+}
+.hd-btn-aurora {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, #ff6a3d, #ff3d8b, #8b5cf6, #ff6a3d);
+  background-size: 300% 100%;
+  animation: hd-shift 6s linear infinite;
+  box-shadow: 0 12px 40px -10px rgba(255, 61, 139, 0.7);
+}
+.hd-btn-aurora::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  animation: hd-shine 3.2s ease-in-out infinite;
+}
+@keyframes hd-shine {
+  60%, 100% { transform: translateX(120%); }
+}
+/* Rotating conic border */
+.hd-conic {
+  position: relative;
+  isolation: isolate;
+}
+.hd-conic::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--hd-angle), transparent 0 60%, #ff3d8b, #a855f7, #38bdf8, transparent 90%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: hd-spin 5s linear infinite;
+  z-index: -1;
+}
+@keyframes hd-spin {
+  to { --hd-angle: 360deg; }
+}
+
+/* ══════════ BENTO — light, warm, spotlight cards ══════════ */
+.hd-bento {
+  background: #f6f4f0;
+  color: #1a2340;
+}
+.hd-dots {
+  background-image: radial-gradient(circle, rgba(26, 35, 64, 0.12) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+.hd-spot {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.4s;
+}
+.hd-spot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(232, 76, 30, 0.14), transparent 45%);
+  pointer-events: none;
+}
+.hd-spot:hover::before {
+  opacity: 1;
+}
+.hd-spot:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px -28px rgba(26, 35, 64, 0.45);
+}
+.hd-underline {
+  background: linear-gradient(transparent 62%, rgba(232, 76, 30, 0.28) 62%);
+}
+.hd-ticket-in {
+  animation: hd-ticket 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes hd-ticket {
+  from { opacity: 0; transform: translateX(-30px) scale(0.95); }
+  to { opacity: 1; transform: none; }
+}
+.hd-pulse-dot {
+  animation: hd-pulse 1.6s ease-out infinite;
+}
+@keyframes hd-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.6); }
+  100% { box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
+}
+
+/* ══════════ TERMINAL — dark tech, neon green ══════════ */
+.hd-terminal {
+  background: #050a12;
+  color: #d1fae5;
+}
+.hd-grid-bg {
+  background-image: linear-gradient(rgba(52, 211, 153, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(52, 211, 153, 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+}
+.hd-scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 3px);
+}
+.hd-caret::after {
+  content: '▋';
+  margin-inline-start: 2px;
+  color: #34d399;
+  animation: hd-blink 1s steps(1) infinite;
+}
+@keyframes hd-blink {
+  50% { opacity: 0; }
+}
+.hd-glow {
+  text-shadow: 0 0 24px rgba(52, 211, 153, 0.55);
+}
+.hd-beam {
+  position: absolute;
+  inset-inline: 0;
+  height: 120px;
+  background: linear-gradient(transparent, rgba(52, 211, 153, 0.08), transparent);
+  animation: hd-beam 7s linear infinite;
+  pointer-events: none;
+}
+@keyframes hd-beam {
+  from { top: -120px; }
+  to { top: 100%; }
+}
+
+/* ── Respect reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .hd-reveal { opacity: 1; transform: none; filter: none; transition: none; }
+  .hd-marquee, .hd-blob, .hd-float, .hd-gradient-text, .hd-btn-aurora, .hd-btn-aurora::after,
+  .hd-conic::before, .hd-beam, .hd-caret::after, .hd-pulse-dot, .hd-scroll-in, .hd-ticket-in {
+    animation: none !important;
+  }
+}

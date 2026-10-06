@@ -14,7 +14,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="פתחו שיחת וואטסאפ"
-      className="fixed bottom-6 left-6 z-50 group flex items-center gap-2"
+      className="fixed bottom-24 left-6 md:bottom-6 z-50 group flex items-center gap-2"
     >
       {/* Tooltip */}
       <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white text-brand-navy text-sm font-semibold px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap pointer-events-none">

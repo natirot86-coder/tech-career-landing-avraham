@@ -42,6 +42,27 @@ Font: **Heebo** (Google Fonts, loaded in globals.css)
 
 ---
 
+## /v2 — Corporate Design Variant
+An alternate skin of the same landing page at `/v2`, built from the TypeUI **Corporate**
+design skill (`.claude/skills/design-system/SKILL.md`): 8pt spacing grid, `rounded-lg`
+components instead of pill shapes, explicit `focus-visible` rings, semantic `corp-*`
+color tokens (tailwind.config.js) mapped onto the existing brand-orange/navy palette.
+Same content, same `/api/submit` + Monday.com flow, same `WhatsAppButton` — only the
+components under `src/components/v2/` differ. Compare side by side at `/` vs `/v2`.
+
+---
+
+## /helpdesk — Help Desk Course Templates
+Three design templates for the Help Desk course: `/helpdesk/aurora` (dark glass + gradient mesh),
+`/helpdesk/bento` (light bento grid, brand colors), `/helpdesk/terminal` (neon terminal).
+`/helpdesk` is a gallery page linking to all three. **All copy lives in
+`src/components/helpdesk/content.js`** (currently placeholder data). Every template uses
+`src/components/helpdesk/LeadForm.js` → `/api/submit` → Monday.com, with
+`utm_source = landing-page-helpdesk-<template>` unless the URL supplies one.
+Motion/effects CSS is in `src/app/helpdesk/helpdesk.css` (respects `prefers-reduced-motion`).
+
+---
+
 ## Component Map
 
 | File | Description |
@@ -112,6 +133,6 @@ Column IDs (discovered via MCP):
 
 ## Social Links (Footer)
 - YouTube: https://www.youtube.com/@-tech-career5878
-- LinkedIn: https://www.linkedin.com/company/tech-career-il
+- LinkedIn: https://www.linkedin.com/school/techcareerisrael/
 - Facebook: https://www.facebook.com/tech.career
 - Instagram: https://www.instagram.com/techcareer
